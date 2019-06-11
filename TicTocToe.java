@@ -1,60 +1,64 @@
-import java.util.Scanner;
+import java.util.*;
 import java.util.Random;
-import java.lang.*;
+//import java.lang.*;
 
 class TicTocToe{
-    static char Arr[][]= new char[][]{{'1','2','3'},{'4','5','6'},{'7','8','9'}};
-    static int k=1,x,count1=0,count2=0,count3=0,count4=0,count5=0,count6=0,count7=0,count=0,count8=0;
-    static int win[]=new int[]{0,0} ;
+    static char board[][]= new char[][]{{'1','2','3'},{'4','5','6'},{'7','8','9'}};   //two diamensional array of baord
+    static int position;    //position of the user 
+    static int count01=0,count02=0,count03=0,count04=0,count05=0,count06=0,count07=0,count=0,count08=0;  //counter variables of computers
+    static int countx1=0,countx2=0,countx3=0,countx4=0,countx5=0,countx6=0,countx7=0,countx8=0;          //counter variables of users
+    static boolean win[]=new boolean[]{true,false};                //aray to winning value of the player
+    static Scanner scanner=new Scanner(System.in); //boject of input 
+
     public static void main(String arg[]){
         System.out.println("The Tic Toc Toe Game:");
-
-         Scanner sc = new Scanner(System.in);
-         //Random rand=new Random();
-         display();
-        do{
+        //display method of board
+      try{
+      displayBoard();    
+      do{
             if(count==9){
                 break;
             }
-            
             getValueFromUser();
-            display();
-            //getvalueFromCommputer();
-            check();
-            System.out.println("count1"+count1);
-            System.out.println("count2"+count2);
-            System.out.println("count3"+count3);
-            System.out.println("count4"+count4);
-            System.out.println("count5"+count5);
-            System.out.println("count6"+count6);
-            System.out.println("count7"+count7);
-            System.out.println("count8"+count8);
-            System.out.println("count"+count);
-
-            if(count1==3 || count2==3 || count3==3 || count4==3 || count5==3 || count6==3 || count7==3)
-            {
-                win[0]=1;
+             count++;
+            displayBoard();
+            getValueFromComputer();
+            count++;
+            displayBoard();
+          
+            if(count01==3 || count02==3 || count03==3 || count04==3 || count05==3 || count06==3 || count07==3 || count08==3){
+                win[1]=true;
                 break;
             }
-            count++;
-        }while(win[0] !=1 || win[1] !=1);
-        if(win[0]==1){
+            else if(countx1==3 || countx2==3 || countx3==3 || countx4==3 || countx5==3 || countx6==3 || countx7==3 || countx8==3){
+                win[0]=true;
+                break;
+            }
+            
+        }while(win[0] !=true || win[1] !=true);
+        if(win[0]==true){
             System.out.println("The user win the match");
-        }
-        else if(win[1]==1){
+        } 
+        else if(win[1]==true){
             System.out.println("The computer win the match");
         }
         else{
             System.out.println("The match draw");
         }
-        sc.close();
     }
-    public static void display(){
+    catch(Exception e){
+        System.out.println("Error Occured"+e.getMessage());
+    }
+    }
+
+
+    // Display method of TicTacToe board
+    public static void displayBoard(){
     
         System.out.println();
-        for(int i=0; i<3 ;i++){
-            for(int j=0; j<3; j++){
-                System.out.print("|"+Arr[i][j]);      
+        for(int row=0; row<3 ;row++){
+            for(int col=0; col<3; col++){
+                System.out.print("|"+board[row][col]);      
             }
             System.out.println("|");
          }
@@ -62,109 +66,195 @@ class TicTocToe{
          
    }
 
-
-
-
    //Getting value or input from user
     public static void getValueFromUser(){
         do{
             System.out.println("Enter your position:");
-            //Scanner sc = new Scanner(System.in);
-            Random rand=new Random();
-            x=rand.nextInt(10);
-            System.out.println(x);
-            switch(x){
+            position = scanner.nextInt();
+            System.out.println(position);
+            switch(position){
                 case 1:
-                    if(Arr[0][0]=='x'){
+                    if(board[0][0]=='x' || board[0][0]=='0'){
                         getValueFromUser(); 
+                    }else{
+                    board[0][0]='x';
+                    countx1++;
+                    countx2++;
+                    countx7++;
                     }
-                    Arr[0][0]='x';
                     break;
                 case 2:
-                    if(Arr[0][1]=='x'){
+                    if(board[0][1]=='x' || board[0][1]=='0'){
                        getValueFromUser(); 
-                    }
-                    Arr[0][1]='x';
+                    }else{
+                        board[0][1]='x';
+                    countx1++;
+                    countx5++;}
                     break;
                 case 3:
-                   if(Arr[0][2]=='x'){
+                   if(board[0][2]=='x' || board[0][2]=='0'){
                         getValueFromUser(); 
-                     }
-                    Arr[0][2]='x';
+                     }else{
+                        board[0][2]='x';
+                    countx1++;
+                    countx6++;
+                    countx8++;}
                     break;
                 case 4:
-                   if(Arr[1][0]=='x'){
+                   if(board[1][0]=='x' || board[1][0]=='0'){
                         getValueFromUser(); 
-                    }
-                    Arr[1][0]='x';
+                    }else{
+                        board[1][0]='x';
+                    countx2++;
+                    countx3++;}
                     break;
                 case 5:
-                    if(Arr[1][1]=='x'){
+                    if(board[1][1]=='x' || board[1][1]=='0'){
                         getValueFromUser(); 
-                    }
-                    Arr[1][1]='x';
+                    }else{
+                        board[1][1]='x';
+                    countx3++;
+                    countx5++;
+                    countx7++;
+                    countx8++;}
                     break;  
                 case 6:
-                    if(Arr[1][2]=='x'){
+                    if(board[1][2]=='x' || board[1][2]=='0'){
                         getValueFromUser(); 
-                    }
-                    Arr[1][2]='x';
+                    }else{
+                        board[1][2]='x';
+                    countx3++;
+                    countx6++;}
                     break;  
                 case 7:
-                    if(Arr[2][0]=='x'){
+                    if(board[2][0]=='x' || board[2][0]=='0'){
                         getValueFromUser(); 
+                    }else{
+                        board[2][0]='x';
+                    countx2++;
+                    countx4++;
+                    countx8++;
                     }
-                    Arr[2][0]='x';
                     break;
                 case 8:
-                    if(Arr[2][1]=='x'){
+                    if(board[2][1]=='x' || board[2][1]=='0'){
                         getValueFromUser(); 
-                    }
-                    Arr[2][1]='x';
+                    }else{
+                        board[2][1]='x';
+                    countx4++;
+                    countx5++;}
                     break;
                 case 9:
-                    if(Arr[2][2]=='x'){
+                    if(board[2][2]=='x' || board[2][2]=='0'){
                         getValueFromUser(); 
-                    }
-                    Arr[2][2]='x';
+                    }else{
+                        board[2][2]='x';
+                    countx4++;
+                    countx6++;
+                    countx7++;}
                     break;
                 default:
                     System.out.println("Please Enter position in between 0-9:");
 
             }
-        }while(x < 1 || x > 9);
-       
-        //display();
+        }while(position < 1 || position > 9);
     }
 
 
 
 
+    public static void getValueFromComputer(){
+        do{
+            System.out.println("Computer Turns:");
+            //Scanner sc = new Scanner(System.in);
+            Random random=new Random();
+            position = random.nextInt(10);
+            System.out.println(position);
+            switch(position){
+                case 1:
+                    if(board[0][0]=='x' || board[0][0]=='0' ){
+                        getValueFromComputer(); 
+                    }else{
+                    board[0][0]='0';
+                    count01++;
+                    count02++;
+                    count07++;}
+                    break;
+                case 2:
+                    if(board[0][1]=='x' || board[0][1]=='0'){
+                        getValueFromComputer(); 
+                    }else{
+                        board[0][1]='0';
+                    count01++;
+                    count05++;}
+                    break;
+                case 3:
+                    if(board[0][2]=='x' || board[0][2]=='0'){
+                        getValueFromComputer(); 
+                     }else{
+                    board[0][2]='0';
+                    count01++;
+                    count06++;
+                    count08++;}
+                    break;
+                case 4:
+                    if(board[1][0]=='x' || board[1][0]=='0'){
+                        getValueFromComputer(); 
+                    }else{
+                    board[1][0]='0';
+                    count02++;
+                    count03++;}
+                    break;
+                case 5:
+                    if(board[1][1]=='x' || board[1][1]=='0'){
+                        getValueFromComputer(); 
+                    }else{
+                        board[1][1]='0';
+                    count03++;
+                    count05++;
+                    count07++;
+                    count08++;}
+                    break;  
+                case 6:
+                    if(board[1][2]=='x' || board[1][2]=='0'){
+                        getValueFromComputer(); 
+                    }else{
+                        board[1][2]='0';
+                    count03++;
+                    count06++;}
+                    break;  
+                case 7:
+                    if(board[2][0]=='x' || board[2][0]=='0'){
+                        getValueFromComputer(); 
+                    }else{
+                    board[2][0]='0';
+                    count02++;
+                    count04++;
+                    count08++;}
+                    break;
+                case 8:
+                    if(board[2][1]=='x' || board[2][1]=='0'){
+                        getValueFromComputer(); 
+                    }else{
+                    board[2][1]='0';
+                    count04++;
+                    count05++;}
+                    break;
+                case 9:
+                    if(board[2][2]=='x' || board[2][2]=='0'){
+                        getValueFromComputer(); 
+                    }else{
+                    board[2][2]='0';
+                    count04++;
+                    count06++;
+                    count07++;}
+                    break;
+                default:
+                    System.out.println("Please Enter position in between 0-9:");
 
-
-
-    static void check(){
-        System.out.println("inside check");
-        
-                if((Arr[0][0]=='x') || (Arr[0][1]=='x') || (Arr[0][2]=='x')){
-                    count1++;
-                    //break;
-                 } 
-                 else if((Arr[0][0])=='x' || (Arr[1][0])=='x' || (Arr[2][0])=='x'){
-                     count2++;
-                     //break;
-                }else if((Arr[0][0])=='x' || (Arr[1][1])=='x' || (Arr[2][2])=='x'){                                //else if((Arr[i][j]=='x' && i==j))
-                    count3++;
-                }else if((Arr[1][0]=='x') || (Arr[1][1]=='x') || (Arr[1][2]=='x')){
-                    count4++;
-                }else if((Arr[2][0]=='x') || (Arr[2][1]=='x') || (Arr[2][2])=='x'){
-                    count5++;
-                }else if(Arr[0][1]=='x' || (Arr[1][1])=='x' || (Arr[2][1])=='x'){
-                    count6++;        
-                }else if(Arr[0][2]=='x' || (Arr[1][2])=='x' || (Arr[2][2])=='x'){
-                    count7++;
-                }else if(Arr[2][0]=='x' || (Arr[1][1])=='x' || (Arr[0][2])=='x'){
-                    count8++;
-                }
             }
- }
+        }while(position < 1 || position > 9);
+       
+        //display();
+    }
+}
