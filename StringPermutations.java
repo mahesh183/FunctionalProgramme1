@@ -1,92 +1,92 @@
+// ///////////////////////////////////////////
+// ///Programme: String Permutations 
+// ///Author   : Mahesh Aurad
+// ///Date     : 12 june 2019
+// ///Input    : abba
+// ///Output   : [abba,abab,aabb,baba,baab,bbaa]
+// ///////////////////////////////////////////
+
+// //import package Scanner for input from user 
 import java.util.Scanner;
-import java.lang.*;
 
 public class StringPermutations{
-    static int count=0;
-    static int n,k;
+    static int DistinctPermutationCount=0,k;           //
+    static int lenght,newlenght=0;
     static int count1=0;
-    static String[] strArray = new String[100];
-    static String[] strArray1 = new String[100]; 
+    static int factorial=1,possiblePermuatationlenght;
+   static String[] distinctPermutationStringArray = new String[10000];
+
     public static void main(String arg[]){
+       
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter String");
-        String str=sc.nextLine();
-        n=str.length();
-        System.out.println("length of string is : "+n);
-        StringPermutations sp = new StringPermutations();
-        sp.permute(str,0,n-1);
+        String inputString=sc.nextLine();
+        lenght=inputString.length();
+        possiblePermuatationlenght = lenght;
+        while(possiblePermuatationlenght != 0){
+            factorial = factorial*possiblePermuatationlenght;
+            possiblePermuatationlenght--;
+        }
+        possiblePermuatationlenght = factorial;
+       
         
-        System.out.println("combinations are:");
-        for(int i=0;i<count-1;i++){
-            k=0;
-            for(int j=0;j<count;j++){
-                 if(strArray[i].equals(strArray[j])){
-            //        System.out.println("sTRING IS SAME"+i+" "+strArray[i]);
-                    //break;
-                    break;         
-                }
-                k++;
-            }
-            if(k==i)
-            {
-                 strArray1[count1]=strArray[i];
-                   count1++;
-            }
-          //  System.out.println(strArray[i]);
-        }
 
-            System.out.print("[");
-        for(int i=0;i<count1;i++){
-            System.out.print(strArray1[i]+"\t");
-            
-        }
+        System.out.println("length of input string is : "+lenght);
+        StringPermutations stringPermutation = new StringPermutations();
+
+       try{
+        System.out.println("Distinct permutations are:");
+        System.out.print("[");
+        stringPermutation.permute(inputString,0,lenght-1);
         System.out.print("]");
-         System.out.println(count);
+        System.out.println("number of distinct permuatations are:"+DistinctPermutationCount);
+       }
+       catch(ArrayIndexOutOfBoundsException e){
+        System.out.println("The index you have entered is invalid");
+        System.out.println("Please enter an index number between 0 and 6");
+       }
+       
+       // stringPermutation.distinctPermutations();
+        
+         sc.close();
    
     }
-    private void permute(String str,int start,int end){
-        int k=0,i=0;
-        
-    
+     /** 
+     * permutation method 
+     * @param str string to calculate permutation for 
+     * @param l starting index 
+     * @param r end index 
+     */
+    private void permute(String paramString,int start,int end){
+        int i=0,icnt=1;
         if(start == end){
-            //System.out.println(str);
-             //System.out.println(strArray.length);
-            strArray[count]=str;
-            count++;
-               
-             ///this loop will find the unique string from string combinations
-            // for(i = 0;i<count1;i++){
-            //     if(count1==0)
-            //     {
-            //         System.out.println("inside count"+strArray[count]);
-            //         strArray[count1]=str;
-            //         break;
-            //     }
-            //      if(strArray[i].equals(str)){
-            //         //System.out.println("sTRING IS SAME"+i+" "+strArray[i]);
-            //         break;         
-            //     }
-            //     k++;
-            //     // System.out.println("inside for loop");
-            // }
-            // if(count1==0){
-            //     count1++;
-            // }
-            // else
-            // if(k==i){
-            //     strArray[count1]=str;
-            //    System.out.println(strArray[count1]);
-            //     count1++;
-            // }
+            
+            for(i=0;i<newlenght;i++){
+                if(distinctPermutationStringArray[i].equals(paramString)){
+                    icnt++;
+                    break;
+                }
+            }
+            if(newlenght==0){
+                distinctPermutationStringArray[newlenght] = paramString;
+                System.out.print(distinctPermutationStringArray[newlenght]+"\t");
+                newlenght++;
+                DistinctPermutationCount++;
+                icnt++;
+            }else if(icnt==1){
+                distinctPermutationStringArray[newlenght] = paramString;
+                System.out.print(distinctPermutationStringArray[newlenght]+"\t");
+                newlenght++;
+                DistinctPermutationCount++;
+            }
         }
         else{
             for( i=start;i<=end;i++){
-                str=swap(str,start,i);
-                permute(str,start+1,end);
-                str=swap(str,start,i);
+                paramString=swap(paramString,start,i);
+                permute(paramString,start+1,end);
+                paramString=swap(paramString,start,i);
                
             }
-            //System.out.println(count);
         }
         
     }
@@ -99,4 +99,80 @@ public class StringPermutations{
         return String.valueOf(charArray);
 
     }
+
+    // public void distinctPermutations(){
+    //     for(int i=0;i<count-1;i++){
+    //         k=0;
+    //         for(int j=0;j<count;j++){
+    //              if(permutationsStringArray[i].equals(permutationsStringArray[j])){
+    //                 break;         
+    //             }
+    //             k++;
+    //         }
+    //         if(k==i)
+    //         {
+    //             distinctPermutationStringArray[count1]=permutationsStringArray[i];
+    //                count1++;
+    //         }
+    //     }
+
+    //         System.out.print("[");
+    //     for(int i=0;i<count1;i++){
+            
+    //         System.out.print(distinctPermutationStringArray[i]+"\t");
+    //     }
+    //     System.out.print("]");
+    //      System.out.println(count);
+
+    // }
 }
+// import java.util.Scanner;
+// // Java program to print all permutations of a 
+// // given string. 
+// public class StringPermutations { 
+//     public static void main(String[] args) 
+//     { 
+//         String str = "ABC"; 
+//         int n = str.length(); 
+//         StringPermutations permutation = new StringPermutations(); 
+//         permutation.permute(str, 0, n - 1); 
+//     } 
+  
+    /** 
+     * permutation function 
+     * @param str string to calculate permutation for 
+     * @param l starting index 
+     * @param r end index 
+     */
+//     private void permute(String str, int l, int r) 
+//     { 
+//         if (l == r) 
+//             System.out.println(str); 
+//         else { 
+//             for (int i = l; i <= r; i++) { 
+//                 str = swap(str, l, i); 
+//                 permute(str, l + 1, r); 
+//                 str = swap(str, l, i); 
+//             } 
+//         } 
+//     } 
+  
+//     /** 
+//      * Swap Characters at position 
+//      * @param a string value 
+//      * @param i position 1 
+//      * @param j position 2 
+//      * @return swapped string 
+//      */
+//     public String swap(String a, int i, int j) 
+//     { 
+//         char temp; 
+//         char[] charArray = a.toCharArray(); 
+//         temp = charArray[i]; 
+//         charArray[i] = charArray[j]; 
+//         charArray[j] = temp; 
+//         return String.valueOf(charArray); 
+//     } 
+// } 
+  
+// // This code is contributed by Mihir Joshi 
