@@ -1,14 +1,34 @@
+//////////////////////////////////////////////////////////////////////
+// ///  Programme  	:  TicTacToe game
+// ///  Author    	:  Mahesh Aurad
+// ///  Date      	:  13 june 2019
+// ///  display    	:  1 | 2 | 3 |
+// /// 	           	:  4 | 5 | 6 |
+// ///                 	:  7 | 2 | 3 |
+// ///  UserInput      	: enter any any number between 1-9 randomly
+// ///  computerinput  	: call random function to get random value between 1-9
+// ///  output		:  x | 0 | x |
+// /// 	           	:  0 | x | 0 |
+// ///                 	:  0 | x | x |
+// ///  output		:  user win the tictactoe game
+// ////////////////////////////////////////////////////////////////////////
+
+
 import java.util.*;
 import java.util.Random;
 //import java.lang.*;
 
 class TicTocToe{
     static char board[][]= new char[][]{{'1','2','3'},{'4','5','6'},{'7','8','9'}};   //two diamensional array of baord
-    static int position;    //position of the user 
+    static int position;    //position of the user
+    //0 is for computer and x is for user
+    //count01 is for first row condition 00 to 02 ,count02 is for first colonm condition 00 to 20,count03 is for second row condition 10 to 12
+    // count04 is for third row condition 30 to 30 ,count05 is for second col condition 01 to 21,count06 is for third col condition 02 to 22
+   //count07 is for digonal condition  from  00 to 22, count08 is for digonal condition  from  22 to 02
     static int count01=0,count02=0,count03=0,count04=0,count05=0,count06=0,count07=0,count=0,count08=0;  //counter variables of computers
     static int countx1=0,countx2=0,countx3=0,countx4=0,countx5=0,countx6=0,countx7=0,countx8=0;          //counter variables of users
-    static boolean win[]=new boolean[]{true,false};                //aray to winning value of the player
-    static Scanner scanner=new Scanner(System.in); //boject of input 
+    static boolean win[]=new boolean[]{true,false}; 					                //aray to winning value of the player
+    static Scanner scanner=new Scanner(System.in);  							//boject of input 
 
     public static void main(String arg[]){
         System.out.println("The Tic Toc Toe Game:");
@@ -162,7 +182,7 @@ class TicTocToe{
 
 
 
-
+//get input from computer
     public static void getValueFromComputer(){
         do{
             System.out.println("Computer Turns:");
