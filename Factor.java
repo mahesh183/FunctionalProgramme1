@@ -1,3 +1,13 @@
+// ///////////////////////////////////////////
+//  Purpose : Flip coin and print percentage of heads and tails 
+// @Author  : Mahesh Aurad
+// Date     : 14 june 2019
+// Input    : The number of times flip coin:4
+// Output   : Percentage of heads=75.00% vs tails=25.00%(head=3,tails=1)
+// ///////////////////////////////////////////
+
+
+
 import java.util.*;
 public class Factor{
 	public int a;
